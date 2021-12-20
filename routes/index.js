@@ -3,34 +3,28 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let Product=[
-    {
-      name:"IPhone 13 Pro Max",
-      category:"Phone",
-      image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000",
-      Description:"A dramatically more powerful camera"
-    },
-    {
-      name:"IPhone 13 Pro Max",
-      category:"Phone",
-      image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000",
-      Description:"A dramatically more powerful camera"
 
+  let products=[
+    {
+      name: "iPhone 13 Pro Max",
+      category: "Mobile",
+      description: "Example",
+      image: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000"
     },
     {
-      name:"IPhone 13 Pro Max",
-      category:"Phone",
-      image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000",
-      Description:"A dramatically more powerful camera"
+      name: "iPhone 13 Pro",
+      category: "Mobile",
+      description: "Example",
+      image: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-silver-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652954000"
     },
     {
-      name:"IPhone 13 Pro Max",
-      category:"Phone",
-      image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000",
-      Description:"A dramatically more powerful camera"
+      name: "iPhone 13 Mini ",
+      category: "Mobile",
+      description: "Example",
+      image: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-mini-blue-select-2021?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1629842711000"
     }
   ]
-  res.render('index', {Product });
+  res.render('index', {products});
 });
 
 module.exports = router;

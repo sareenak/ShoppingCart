@@ -39,63 +39,26 @@
 </nav>
     </header>
     <section>
-        <div class="container mt-5">
+    <div class="container mt-5">
         <div class="row">
+            {{#each products}}
             <div class="col-md-3">
                 <div class="card" style="width: 18rem;">
-  <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Iphone 13 Pro Max</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-
-
-            </div>
-            <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-  <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Iphone 13 Pro Max</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-
-
-            </div>
-        
-        <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-  <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Iphone 13 Pro Max</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-
-
-            </div>
-        
-        <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-  <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-gold-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1631652956000" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Iphone 13 Pro Max</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-
-
-            </div>
-        
+                    <img class="card-img-top"
+                        src="{{this.image}}"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+                </div>
+            {{/each}}
+            
         </div>
-        </div>
-
-    </section>
+    </div>
+</section>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
