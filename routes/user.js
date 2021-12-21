@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
       image: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-mini-blue-select-2021?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1629842711000"
     }
   ]
-  res.render('index', {products,admin:true});
+  res.render('index', {products,admin:false});
 });
 
 module.exports = router;
