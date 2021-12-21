@@ -24,6 +24,13 @@ router.get('/', function(req, res, next) {
     }
   ]
   res.render('admin/view-products',{admin:true,products});
+  router.get('/addproducts',function(req,res,){
+    res.render('admin/addproducts')
+  }  );
+  router.post('/addproducts',(req,res)=>{
+    console.log(req.body);
+    console.log(req.files.image);
+  });
 
 });
 
