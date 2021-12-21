@@ -3,16 +3,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var exphbs=require('express-handlebars');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { handlebars } = require('hbs');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.engine( 'hbs', exphbs.engine( { 
+  extname: 'hbs', 
+  defaultLayout: 'layout', 
+  layoutsDir: __dirname + '/views/layout/',
+  partialsDir: __dirname + '/views/partials/'
+} ) );
 app.set('view engine', 'hbs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
