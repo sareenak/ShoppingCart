@@ -1,5 +1,7 @@
 var express = require('express');
+const { helpers } = require('handlebars');
 var router = express.Router();
+var producthelpers=require('../helpers/product-helpers')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -30,6 +32,9 @@ router.get('/', function(req, res, next) {
   router.post('/addproducts',(req,res)=>{
     console.log(req.body);
     console.log(req.files.image);
+    producthelpers.addProduct(req.body,(result)=>{
+       res.render('admin/addproducts');
+    })
   });
 
 });
