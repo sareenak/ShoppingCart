@@ -6,6 +6,7 @@ var logger = require('morgan');
 var exphbs=require('express-handlebars');
 var db=require('./config/connection')
 var bodyParser = require("body-parser");
+var session=require("express-session");
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 const { handlebars } = require('hbs');
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({secret:"key",cookie:{maxAge:60000}}))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
 db.connect((err)=>{
