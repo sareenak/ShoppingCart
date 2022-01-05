@@ -6,9 +6,10 @@ var producthelpers=require('../helpers/product-helpers')
 var userHelpers=require('../helpers/user-helpers')
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  let user=req.session.user
   producthelpers.getAllProducts().then((product)=>{
 
-  res.render('user/view-products', {product,admin:false})})
+  res.render('user/view-products', {product,admin:false,user})})
 });
 router.get('/login',(req,res)=>{
 res.render('user/login')
