@@ -23,6 +23,7 @@ router.get('/signup',(req,res)=>{
   })
 
   })
+  
   router.post('/login',(req,res)=>{
     userHelpers.doLogin(req.body).then((response)=>{
       if(response.status){
@@ -34,6 +35,10 @@ router.get('/signup',(req,res)=>{
         res.redirect('/login')
       }
     })
+  })
+  router.get('/logout',(req,res)=>{
+    req.session.destroy()
+    res.redirect('/')
   })
 
 module.exports = router;

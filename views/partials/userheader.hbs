@@ -26,7 +26,13 @@
   {{/if}}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="/login">Login</a></li>
+    {{#if user}}
+    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+
+  {{else}}
+  <li><a class="dropdown-item" href="/login">Login</a></li>
+  {{/if}}
+    
   
   </ul>
 </div>
