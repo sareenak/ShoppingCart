@@ -2,7 +2,7 @@
     <div class="col-md-6 m-auto">
         <div class="container mt-5 pe-5">
             <h1 class="text-center mb-3">Create new account</h1>
-            <form action="/signup" method="POST" >
+            <form action="/signup" method="POST" enctype="multipart/form-data" >
                 <div class="form-group mb-3">
                     <label>Name</label>
                     <input type="text" class="form-control" placeholder="Enter the name" name="name">
@@ -16,9 +16,11 @@
                     <input type="password" class="form-control" placeholder="Password" name="password">
                 </div>
 
-            </form>
+            
             <a href="/login" class="text-decoration-none">Already have an account?</a>
+           
             <button class="btn btn-primary float-end" type="submit" >Signup</button>
+            </form>
         </div>
     </div>
 </div>
