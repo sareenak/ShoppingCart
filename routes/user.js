@@ -14,8 +14,11 @@ router.get('/', function(req, res, next) {
 router.get('/login',(req,res)=>{
   if(req.session.loggedIn){
     res.redirect('/')
+
   }else{
-   res.render('user/login')
+   res.render('user/login',{"loginErr":req.session.loginErr})
+   req.session.loginErr=false
+  
   }
 })
 router.get('/signup',(req,res)=>{
@@ -36,7 +39,9 @@ router.get('/signup',(req,res)=>{
         res.redirect('/')
       }
       else{
+        req.session.loginErr="Invalid Username or Password"
         res.redirect('/login')
+        
       }
     })
   })
