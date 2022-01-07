@@ -36,6 +36,19 @@ module.exports={
         })
 
 
+    },
+    updateProduct:(prodid,data)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.PRODUCT_COLLECTION).updateOne({_id:objectId(prodid)},{
+                $set:{
+                    name:data.name,
+                    description:data.description,
+                    category:data.category
+                }
+            }).then((response)=>{
+                resolve()
+            })
+        })
     }
     
 }
