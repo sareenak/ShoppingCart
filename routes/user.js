@@ -1,3 +1,4 @@
+const { response } = require('express');
 var express = require('express');
 const { helpers } = require('handlebars');
 //const { response } = require('../app');
@@ -34,6 +35,9 @@ router.get('/signup',(req,res)=>{
   router.post('/signup',(req,res)=>{
   userHelpers.doSignup(req.body).then((data)=>{
     console.log(data);
+    req.session.loggedIn=true
+    req.session.user=data
+    res.redirect('/')
   })
 
   })
@@ -60,6 +64,11 @@ router.get('/signup',(req,res)=>{
 
 
     res.render('user/cart')
+  })
+  router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
+    userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
+      res.redirect('/')
+    })
   })
 
 module.exports = router;
