@@ -81,7 +81,7 @@ module.exports={
                         }],
                         as:'cartItems'
                         }} ]).toArray()
-                        resolve(cartItems)
+                        resolve(cartItems[0].cartItems)
         })
     }
 }
