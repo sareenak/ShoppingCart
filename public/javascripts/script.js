@@ -4,9 +4,9 @@ function addToCart(proId){
         method:'get',
         success:(response)=>{
             if(response.status){
-                let count=$('#cart').html()
+                let count=$('#cart1').html()
                 count=parseInt(count)+1
-                $('#cart').html(count)
+                $('#cart1').html(count)
             }
             
         }
