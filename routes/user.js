@@ -75,5 +75,12 @@ router.get('/signup',(req,res)=>{
       res.json({status:true})
     })
   })
+  router.post('/change-product-quantity',(req,res,next)=>{
+    userHelpers.changeQuantity(req.body).then((response)=>{
+      console.log(response)
+      //res.redirect('user/cart',{response})
+
+    })
+  })
 
 module.exports = router;

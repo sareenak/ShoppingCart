@@ -98,6 +98,7 @@ module.exports={
                         quantity:'$products.quantity'
                     }
                 },
+               
                 {
                     $lookup:{
                         from:collection.PRODUCT_COLLECTION,
@@ -105,7 +106,15 @@ module.exports={
                         foreignField:'_id',
                         as:'product'
                     }
+                },
+                {
+                    $project:{
+                        item:1,quantity:1,
+                        product:{$arrayElemAt:["$product",0]}
+                    }
+
                 }
+
                  ]).toArray()
                         
                         resolve(cartItems)
@@ -121,5 +130,21 @@ module.exports={
             resolve(count)
         })
         
-    }
+    },
+    changeQuantity:(cartObj)=>{
+        count=parseInt(cartObj.count)
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.CART_COLLECTION).
+            updateOne(
+                { 
+                   _id:objectId(cartObj.cart), 'products.item':objectId(cartObj.product)},
+                    {
+                        $inc:{'products.$.quantity':count}
+                    }
+
+                 ).then((response)=>{
+                     resolve(response)
+                 })
+                })
+             }
 }
