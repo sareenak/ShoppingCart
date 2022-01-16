@@ -77,8 +77,9 @@ router.get('/signup',(req,res)=>{
   })
   router.post('/change-product-quantity',(req,res,next)=>{
     userHelpers.changeQuantity(req.body).then((response)=>{
-      console.log(response)
-      //res.redirect('user/cart',{response})
+     // console.log(response)
+
+      res.json(response)
 
     })
   })

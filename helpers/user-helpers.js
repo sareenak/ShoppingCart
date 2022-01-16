@@ -2,7 +2,7 @@ var db=require('../config/connection')
 var collection=require('../config/collections');
 const bcryptjs=require('bcryptjs');
 const async = require('hbs/lib/async');
-const { response } = require('express');
+// const { response } = require('express');
 var objectId=require('mongodb').ObjectId
 const { USER_COLLECTION } = require('../config/collections');
 module.exports={
@@ -133,18 +133,31 @@ module.exports={
     },
     changeQuantity:(cartObj)=>{
         count=parseInt(cartObj.count)
+        quantity=parseInt(cartObj.quantity)
         return new Promise((resolve,reject)=>{
+            if(cartObj.count==-1 && cartObj.quantity==1){
+                db.get().collection(collection.CART_COLLECTION).
+                updateOne({ _id:objectId(cartObj.cart)},
+                {
+                    $pull:{products:{item:objectId(cartObj.product)}}
+
+                }).then((response)=>{
+                    resolve({removeProduct:true}) 
+                })
+                }else{
             db.get().collection(collection.CART_COLLECTION).
             updateOne(
                 { 
-                   _id:objectId(cartObj.cart), 'products.item':objectId(cartObj.product)},
+                   _id:objectId(cartObj.cart),'products.item':objectId(cartObj.product)},
                     {
                         $inc:{'products.$.quantity':count}
                     }
 
                  ).then((response)=>{
-                     resolve(response)
+                     resolve(true)
                  })
-                })
-             }
+            
+            }
+             })
+            }
 }
