@@ -21,7 +21,7 @@
                         <button class="cart-item-count me-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
                         <button class="cart-item-count ms-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button></td>
-                     <td><button class="btn btn-danger">Remove</button></td>
+                     <td><button class="btn btn-danger" onclick="removeCart('{{this._id}}','{{this.product._id}}')">Remove</button></td>
                 </tr> 
                 {{/each}}
             </tbody>
@@ -51,5 +51,23 @@
                 }
              })
         }
-    
+      
+        //Removing cart
+        function removeCart(cartid,prodid){
+            $.ajax({
+            url:'/remove-product-cart',
+            data:{
+                cart1:cartid,
+                product1:prodid
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.removeProduct){
+                alert('Removing the product')
+                location.reload()
+                }
+            }
+            })
+        } 
+    // End
 </script>

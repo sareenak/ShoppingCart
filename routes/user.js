@@ -75,12 +75,18 @@ router.get('/signup',(req,res)=>{
       res.json({status:true})
     })
   })
-  router.post('/change-product-quantity',(req,res,next)=>{
+  router.post('/change-product-quantity',(req,res)=>{
     userHelpers.changeQuantity(req.body).then((response)=>{
      // console.log(response)
 
       res.json(response)
 
+    })
+  })
+  //removing product
+  router.post('/remove-product-cart',(req,res)=>{
+    userHelpers.removeProductCart(req.body).then((response)=>{
+      res.redirect('user/cart')
     })
   })
 
