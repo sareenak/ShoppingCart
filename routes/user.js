@@ -89,8 +89,10 @@ router.get('/signup',(req,res)=>{
       res.json({msg:'success'})
     })
   })
-  router.get('/place-order',verifyLogin,(req,res)=>{
-    res.render('user/place-order',{user:req.session.user})
+  router.get('/place-order',verifyLogin,async(req,res)=>{
+   let total=await userHelpers.getTotalAmount(req.session.user._id)
+    res.render('user/place-order',{user:req.session.user,total})
   })
+  
 
 module.exports = router;
