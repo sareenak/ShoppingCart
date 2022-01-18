@@ -168,7 +168,7 @@ module.exports={
                     $pull:{products:{item:objectId(cartRemove.product1)}}
 
                 }).then((response)=>{
-                    resolve({removeProduct:true}) 
+                    resolve({removeProducts:true}) 
                 })
                 })
             }

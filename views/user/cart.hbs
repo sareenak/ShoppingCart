@@ -54,18 +54,19 @@
       
         //Removing cart
         function removeCart(cartid,prodid){
+
             $.ajax({
             url:'/remove-product-cart',
             data:{
                 cart1:cartid,
                 product1:prodid
             },
-            method:'post',
+            method:'delete',
             success:(response)=>{
-                if(response.removeProduct){
+                if(response.msg=='success'){
                 alert('Removing the product')
                 location.reload()
-                }
+            }
             }
             })
         } 

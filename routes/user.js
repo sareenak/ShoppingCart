@@ -84,9 +84,9 @@ router.get('/signup',(req,res)=>{
     })
   })
   //removing product
-  router.post('/remove-product-cart',(req,res)=>{
+  router.delete('/remove-product-cart',(req,res)=>{
     userHelpers.removeProductCart(req.body).then((response)=>{
-      res.redirect('user/cart')
+      res.json({msg:'success'})
     })
   })
 
