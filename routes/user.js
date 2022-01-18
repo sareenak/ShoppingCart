@@ -89,5 +89,8 @@ router.get('/signup',(req,res)=>{
       res.json({msg:'success'})
     })
   })
+  router.get('/place-order',verifyLogin,(req,res)=>{
+    res.render('user/place-order',{user:req.session.user})
+  })
 
 module.exports = router;
