@@ -98,7 +98,7 @@ router.get('/signup',(req,res)=>{
     let products=await userHelpers.getCartProductList(req.session.user._id)
     let totalPrice= await userHelpers.getTotalAmount(req.session.user._id)
     userHelpers.placeOrder(req.body,products,totalPrice).then((response)=>{
-
+      res.json({status:true})
     })
     console.log(req.body)
   })

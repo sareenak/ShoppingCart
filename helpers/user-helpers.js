@@ -221,6 +221,25 @@ module.exports={
             placeOrder:(order,products,total)=>{
                 return new Promise((resolve,reject)=>{
                     console.log(order,products,total)
+                    let status=order['payment']==='COD'?'Placed':'Pending'
+                    let orderObj={
+                        Delivery:{
+                            address:order.address,
+                            mobile:order.mobile,
+                            pincode:order.pincode
+                        },
+                        userId:objectId(order.userId),
+                        payment:order['payment'],
+                        total:total,
+                        products:products,
+                        status:status
+
+                    }
+                    db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
+                        db.get().collection(collection.CART_COLLECTION).remove({user:objectId(order.userId)})
+                        resolve()
+                    })
+
                 })
 
             },
