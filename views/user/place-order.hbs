@@ -1,18 +1,16 @@
 <section>
     <div class="container mt-4">
-        <form action="" method="">
+        <form action="" method="" id="checkout-form">
          <div class="row">
              <div class="col-md-6 ">
-            
-             <h4 class="mt-4">Enter Delivery Details</h4>
-               
-               <div class="mt-4">
+            <h4 class="mt-4">Enter Delivery Details</h4>
+                   <div class="mt-4">
                 <label for="">Address</label>
-                <input type="text" name="address" class="form-control">
+                <input type="text" name="address" class="form-control" id="address">
                 <label for="">Pincode</label>
-                 <input type="text" name="pincode" class="form-control">
+                 <input type="text" name="pincode" class="form-control" id="pincode">
                 <label for="">Mobile</label>
-                 <input type="text" name="mobile" class="form-control">
+                 <input type="text" name="mobile" class="form-control" id="mobile">
                 </div>
                 </div>
                 <div class="col-md-6">
@@ -22,22 +20,29 @@
                         <div class="payment">
                             <p>Payment method</p>
                             <label class="radio-inline">
-                                <input  type="radio" value="COD" name="payment">COD
+                                <input  type="radio" value="COD" name="payment" id="cod">COD
                             </label>
                             <br>
                              <label class="radio-inline mt-3">
-                                <input  type="radio" value="online-payment" name="payment">Online Payment
+                                <input  type="radio" value="online-payment" name="payment" id="online-payement">Online Payment
                             </label>
                             <br>
-                            <button class="btn btn-primary float-end mb-2" type="submit" >Checkout</button>
-                            
-
-                
-
-
-                    </div>
-                </div>
-    </div>
-    </form>
-    </div>
-</section>
+                            <button class="btn btn-primary float-end mb-2" type="submit" id="checkout" >Checkout</button>
+                              </div>
+                          </div>
+                          </div>
+                          </form>
+                          </div>
+               </section>
+        <script>
+            $("#checkout-form").submit((e)=>{
+            $.ajax({
+                url:'/place-order',
+                method:'post',
+                data:$('#checkout-form').serialize(),
+                success:(response)=>{
+                    alert(response)
+                }
+            })
+            })
+        </script>
