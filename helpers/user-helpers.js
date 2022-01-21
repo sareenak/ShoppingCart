@@ -4,7 +4,8 @@ const bcryptjs=require('bcryptjs');
 const async = require('hbs/lib/async');
 // const { response } = require('express');
 var objectId=require('mongodb').ObjectId
-const { USER_COLLECTION } = require('../config/collections');
+const { USER_COLLECTION, CART_COLLECTION } = require('../config/collections');
+const { response } = require('express');
 module.exports={
     doSignup:(userData)=>{
         return new Promise(async(resolve,reject)=>{
@@ -216,5 +217,17 @@ module.exports={
                                 resolve(total[0].total)
                 })
 
+            },
+            placeOrder:(order,products,total)=>{
+                return new Promise((resolve,reject)=>{
+                    console.log(order,products,total)
+                })
+
+            },
+            getCartProductList:(userId)=>{
+                return new Promise(async(resolve,reject)=>{
+                   let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+                   resolve(cart.products)
+                })
             }
-}
+        }
