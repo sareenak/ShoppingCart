@@ -213,7 +213,7 @@ module.exports={
                     }
         
                          ]).toArray()
-                                console.log(total[0].total)
+                                //console.log(total[0].total)
                                 resolve(total[0].total)
                 })
 
@@ -232,11 +232,12 @@ module.exports={
                         payment:order['payment'],
                         total:total,
                         products:products,
-                        status:status
+                        status:status,
+                        date:new Date()
 
                     }
                     db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
-                        db.get().collection(collection.CART_COLLECTION).remove({user:objectId(order.userId)})
+                        db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(order.userId)})
                         resolve()
                     })
 

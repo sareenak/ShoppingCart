@@ -102,6 +102,9 @@ router.get('/signup',(req,res)=>{
     })
     console.log(req.body)
   })
+  router.get('/order-placed',(req,res)=>{
+    res.render('user/order-placed',{user:req.session.user})
+  })
   
 
 module.exports = router;
