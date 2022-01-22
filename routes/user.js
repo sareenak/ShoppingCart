@@ -105,6 +105,11 @@ router.get('/signup',(req,res)=>{
   router.get('/order-placed',(req,res)=>{
     res.render('user/order-placed',{user:req.session.user})
   })
+  router.get('/view-orders',async(req,res)=>{
+ let orders= await userHelpers.getUserOrders(req.session.user._id)
+      res.render('user/view-orders',{user:req.session.user,orders})
+    
+  })
   
 
 module.exports = router;
