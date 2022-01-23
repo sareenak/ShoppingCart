@@ -38,7 +38,7 @@ router.get('/signup',(req,res)=>{
   })
   router.post('/signup',(req,res)=>{
   userHelpers.doSignup(req.body).then((data)=>{
-    console.log(data);
+    //console.log(data);
     req.session.loggedIn=true
     req.session.user=data
     res.redirect('/')
@@ -100,7 +100,7 @@ router.get('/signup',(req,res)=>{
     userHelpers.placeOrder(req.body,products,totalPrice).then((response)=>{
       res.json({status:true})
     })
-    console.log(req.body)
+   // console.log(req.body)
   })
   router.get('/order-placed',(req,res)=>{
     res.render('user/order-placed',{user:req.session.user})
@@ -109,6 +109,10 @@ router.get('/signup',(req,res)=>{
  let orders= await userHelpers.getUserOrders(req.session.user._id)
       res.render('user/view-orders',{user:req.session.user,orders})
     
+  })
+  router.get('/view-orders-product/:id',async(req,res)=>{
+  let products=await  userHelpers.getAllOrdersPlaced(req.params.id)
+    res.render('user/view-orders-product',{user:req.session.user,products})
   })
   
 
