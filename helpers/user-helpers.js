@@ -253,7 +253,7 @@ module.exports={
             },
             getCartProductList:(userId)=>{
                 return new Promise(async(resolve,reject)=>{
-                   let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+                   let cart=await db.get().collection(collection.CART_COLLECTION).find({user:objectId(userId)})
                    resolve(cart.products)
                 })
             },
@@ -311,7 +311,7 @@ module.exports={
          var options = {
           amount: total,  // amount in the smallest currency unit
           currency: "INR",
-          receipt: "order_rcptid_11"+orderId
+          receipt: ""+orderId
       };
           instance.orders.create(options, function(err, order) {
          console.log(order);
@@ -322,6 +322,38 @@ module.exports={
         
   
                 
+            })
+        },
+        verifyPayment:(details)=>{
+            return new Promise((resolve,reject)=>{
+                const crypto = require('crypto');
+                let hmac = crypto.createHmac('sha256', '8axiTke6uHnkiNKZQV87J4tL')
+                hmac.update(details.payment['razorpay_order_id']+"|" + details.payment['razorpay_payment_id']);
+               let generatedSignature=hmac.digest('hex');
+                if(generatedSignature===details.payment['razorpay_signature']){
+                    resolve()
+                    console.log("succcess")
+                }else{
+                    console.log("not matched")
+                    reject()
+                }
+            })
+        },
+        changePaymentStatus:(orderId)=>{
+            return new Promise((resolve,reject)=>{
+                console.log(orderId)
+                let s=orderId.toString()
+                console.log(s)
+                db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(orderId.trim())},
+                {
+                
+                    $set:{
+                       status:'placed'
+                    }
+                
+                }).then(()=>{
+                    resolve()
+                })
             })
         }
         }

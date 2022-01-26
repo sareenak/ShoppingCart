@@ -1,3 +1,4 @@
+//const { json } = require('body-parser');
 const { response } = require('express');
 var express = require('express');
 const { helpers } = require('handlebars');
@@ -123,6 +124,17 @@ router.get('/signup',(req,res)=>{
   })
   router.post('/verify-payment',(req,res)=>{
     console.log(req.body)
+    userHelpers.verifyPayment(req.body).then(()=>{
+      
+      userHelpers.changePaymentStatus(req.body.order['receipt']).then(()=>{
+        console.log(req.body)
+        console.log("payment successfull")
+        res.json({status:true})
+      })
+      }).catch((err)=>{
+        console.log(err);
+        res.json({status:false ,errMsg:'not success'})
+      })
   })
 
 module.exports = router;
