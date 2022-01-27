@@ -1,5 +1,6 @@
 var db=require('../config/connection')
 var collections=require('../config/collections');
+const bcryptjs=require('bcryptjs');
 var objectId=require('mongodb').ObjectId
 const async = require('hbs/lib/async');
 

@@ -20,9 +20,10 @@ module.exports={
            let user= db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
                 data.user=user
                 resolve(data)
+
             })
         })
-    },
+    },  
     doLogin:(userData)=>{
         return new Promise(async(resolve,reject)=>{
             let response={}
@@ -31,6 +32,7 @@ module.exports={
                 bcryptjs.compare(userData.password,user.password).then((status)=>{
                     if(status){
                         console.log("login success")
+                        
                         response.user=user
                         response.status=true
                         resolve(response)
