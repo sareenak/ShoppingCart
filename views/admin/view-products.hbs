@@ -1,9 +1,9 @@
 <section>
     <div class="container">
         <div class="row mt-4">
-            <a href="/admin/addproducts" role="button" class="btn btn-success me-auto btn-sm">Add Products</a>
+            <a href="/admin/addproducts" role="button" class="btn btn-success ms-auto mb-5">Add Products</a>
         </div>
-        <table class="table">
+        <table class="table" id="table_id">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -12,6 +12,7 @@
       <th scope="col">Description</th>
       <th scope="col">Price</th>
       <th scop="col">Image</th>
+      <th scop="col">Option</th>
     </tr>
   </thead>
   <tbody>
@@ -34,3 +35,8 @@
 </table>
     </div>
 </section>
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>

@@ -3,16 +3,55 @@ const { helpers } = require('handlebars');
 //const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
 var producthelpers=require('../helpers/product-helpers')
+const verifyLogin=(req,res,next)=>{
+  if(req.session.adminLoggedIn){
+    next()
+  }else{
+    res.redirect('admin/login')
+  }
+}
 
 /* GET users listing. */
+
 router.get('/', function(req, res, next) {
+  let admin=req.session.admin
+  //if(req.session.admin)
   producthelpers.getAllProducts().then((product)=>{
     //console.log(product)
-    res.render('admin/view-products',{admin:true,product})
+    res.render('admin/view-products',{product,admin:true,user:false})
     
 
   })
 });
+router.get('/login',(req,res)=>{
+  if(req.session.admin){
+    res.redirect('admin/view-products')
+
+  }else{
+   res.render('admin/login',{"loginErr":req.session.adminLoginErr})
+   req.session.adminLoginErr=false
+  
+  }
+})
+router.post('/admin/login',(req,res)=>{
+  producthelpers.doLogin(req.body).then((response)=>{
+    if(response.status){
+     req.session.admin=response.admin
+      req.session.admin.loggedIn=true
+      res.redirect('admin/view-products')
+    }
+    else{
+      req.session.adminLoginErr="Invalid Username or Password"
+      res.redirect('admin/login')
+      
+    }
+  })
+})
+router.get('admin/logout',(req,res)=>{
+  req.session.admin=null
+  req.session.adminLoggedIn=false
+  res.redirect('admin/login')
+})
   
   router.get('/addproducts',function(req,res,){
     res.render('admin/addproducts')

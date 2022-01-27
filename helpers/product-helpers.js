@@ -7,10 +7,19 @@ module.exports={
 
     addProduct:(product,callback)=>{
         console.log('product ');
-        db.get().collection('product').insertOne(product).then((data)=>{
+        db.get().collection(collections.PRODUCT_COLLECTION).insertOne(product).then((data)=>{
             callback(data.insertedId);
         })
 
+    },
+    doLogin:(adminData)=>{
+        return new Promise(async(resolve,reject)=>{
+            adminData.password=await bcryptjs.hash(adminData.password,10);
+           let admin= db.get().collection(collections.ADMIN_COLLECTION).insertOne(adminData).then((data)=>{
+                data.admin=admin
+                resolve(data)
+            })
+        })
     },
     getAllProducts:()=>{
         return new Promise(async(resolve,reject)=>{

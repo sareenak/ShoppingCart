@@ -309,7 +309,7 @@ module.exports={
             return new Promise((resolve,reject)=>{
                 
          var options = {
-          amount: total,  // amount in the smallest currency unit
+          amount: total*100,  // amount in the smallest currency unit
           currency: "INR",
           receipt: ""+orderId
       };
@@ -341,10 +341,7 @@ module.exports={
         },
         changePaymentStatus:(orderId)=>{
             return new Promise((resolve,reject)=>{
-                console.log(orderId)
-                let s=orderId.toString()
-                console.log(s)
-                db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(orderId.trim())},
+            db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(orderId.trim())},
                 {
                 
                     $set:{
