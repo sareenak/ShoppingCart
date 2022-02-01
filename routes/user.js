@@ -85,7 +85,8 @@ router.get('/signup',(req,res)=>{
     })
   })
   router.post('/change-product-quantity',(req,res)=>{
-    userHelpers.changeQuantity(req.body).then((response)=>{
+    userHelpers.changeQuantity(req.body).then(async(response)=>{
+      response.total=await userHelpers.getTotalAmount(req.body.user)
 
      // console.log(response)
 
