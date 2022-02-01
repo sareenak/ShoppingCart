@@ -59,6 +59,9 @@ router.post('/edit-product/:id',(req,res)=>{
 
   })
 })
+//router.get('/view-users',(req,res)=>{
+
+//})
 
 
 module.exports = router;

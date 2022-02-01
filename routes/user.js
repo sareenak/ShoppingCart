@@ -8,7 +8,7 @@ var router = express.Router();
 var producthelpers=require('../helpers/product-helpers')
 var userHelpers=require('../helpers/user-helpers')
 const verifyLogin=(req,res,next)=>{
-  if(req.session.userLoggedIn){
+  if(req.session.user.loggedIn){
     next()
   }else{
     res.redirect('/login')
@@ -66,7 +66,7 @@ router.get('/signup',(req,res)=>{
   })
   router.get('/logout',(req,res)=>{
     req.session.user=null
-    req.session.userLoggedIn=false
+    
     res.redirect('/')
   })
   router.get('/cart',verifyLogin,async(req,res)=>{
@@ -127,6 +127,7 @@ router.get('/signup',(req,res)=>{
     
   })
   router.get('/view-orders-product/:id',async(req,res)=>{
+    console.log(req.params.id +"hiiii")
   let products= await  userHelpers.getAllOrdersPlaced(req.params.id)
     res.render('user/view-orders-product',{user:req.session.user,products})
   })
