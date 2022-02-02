@@ -27,7 +27,7 @@ module.exports={
                         
                         response.admin=admin
                         response.status=true
-                        console.log(response+"sareena ")
+                        
                         resolve(response)
 
                     }else{
@@ -74,6 +74,12 @@ module.exports={
             }).then((response)=>{
                 resolve()
             })
+        })
+    },
+    getallUsers:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let user=await db.get().collection(collections.USER_COLLECTION).find().toArray()
+            resolve(user)
         })
     }
     

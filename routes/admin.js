@@ -17,12 +17,16 @@ router.get('/', function(req, res, next) {
  
   let admin=req.session.admin
    console.log(req.session.admin)
+   if(admin){
   producthelpers.getAllProducts().then((product)=>{
     //console.log(product)
     res.render('admin/view-products',{product,admin,user:false})
     
 
-  })})
+  })
+}else
+res.redirect('/admin/login')
+})
 
 router.get('/login',(req,res)=>{
   if(req.session.admin){
@@ -37,12 +41,11 @@ router.get('/login',(req,res)=>{
 })
 router.post('/login',(req,res)=>{
   producthelpers.doLogin(req.body).then((response)=>{
-    console.log(response.status+"sareeenaaa")
+    
     if(response.status){
       
       req.session.admin=response.admin
       req.session.admin.loggedIn=true
-      console.log(req.session.admin +"sarea")
 
      
         
@@ -65,8 +68,8 @@ router.get('/logout',(req,res)=>{
 
 
   
-  router.get('/addproducts',function(req,res,){
-    res.render('admin/addproducts',{admin:true})
+  router.get('/addproducts',verifyLogin,function(req,res,){
+    res.render('admin/addproducts',{admin:req.session.admin})
   }  );
   router.post('/addproducts',(req,res)=>{
     producthelpers.addProduct(req.body,(id)=>{
@@ -107,9 +110,11 @@ router.post('/edit-product/:id',(req,res)=>{
 
   })
 })
-//router.get('/view-users',(req,res)=>{
+router.get('/allUsers',verifyLogin,(req,res)=>{
+  producthelpers.getallUsers().then((user)=>{
+  res.render('admin/allUsers',{user})})
 
-//})
+})
 
 
 module.exports = router;
