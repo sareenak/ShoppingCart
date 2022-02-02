@@ -85,11 +85,11 @@ router.get('/logout',(req,res)=>{
       
     })
   });
-  router.get('/delete-product/:id',(req,res)=>{
+  router.get('/delete-product/:id',verifyLogin,(req,res)=>{
     let prodId=req.params.id
     console.log(prodId)
     producthelpers.deleteProduct(prodId).then((response)=>{
-      res.redirect('/admin/',{admin:true})
+      res.redirect('/admin/',{admin:req.session.admin})
     })
   })
 router.get('/edit-product/:id',async(req,res)=>{
@@ -116,7 +116,8 @@ router.get('/allUsers',verifyLogin,(req,res)=>{
   res.render('admin/allUsers',{user,admin:req.session.admin})})
 
 })
-router.get('/allOrders',verifyLogin,async(req,res)=>{
+router.get('/allOrders',verifyLogin,(req,res)=>{
+  if(req.session.admin)
   producthelpers.getallOrders().then((orders)=>{
     res.render('admin/view-allOrders',{admin:req.session.admin,orders})
   })
