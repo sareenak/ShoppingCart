@@ -116,11 +116,15 @@ router.get('/allUsers',verifyLogin,(req,res)=>{
   res.render('admin/allUsers',{user,admin:req.session.admin})})
 
 })
-router.get('/allOrders',verifyLogin,(req,res)=>{
-  if(req.session.admin)
+router.get('/view-allOrders',verifyLogin,(req,res)=>{
+  if(req.session.admin){
   producthelpers.getallOrders().then((orders)=>{
-    res.render('admin/view-allOrders',{admin:req.session.admin,orders})
+    res.render('admin/view-allOrders',{admin:req.session.admin,orders,user:false})
   })
+}
+else{
+  res.redirect('/admin/login')
+}
        
      
    })
