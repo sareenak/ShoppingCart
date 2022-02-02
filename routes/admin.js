@@ -2,7 +2,8 @@ var express = require('express');
 const { helpers } = require('handlebars');
 //const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
-var producthelpers=require('../helpers/product-helpers')
+var producthelpers=require('../helpers/product-helpers');
+const userHelpers = require('../helpers/user-helpers');
 const verifyLogin=(req,res,next)=>{
   if(req.session.admin.loggedIn){
     next()
@@ -112,9 +113,15 @@ router.post('/edit-product/:id',(req,res)=>{
 })
 router.get('/allUsers',verifyLogin,(req,res)=>{
   producthelpers.getallUsers().then((user)=>{
-  res.render('admin/allUsers',{user})})
+  res.render('admin/allUsers',{user,admin:req.session.admin})})
 
 })
-
+router.get('/allOrders',verifyLogin,async(req,res)=>{
+  producthelpers.getallOrders().then((orders)=>{
+    res.render('admin/view-allOrders',{admin:req.session.admin,orders})
+  })
+       
+     
+   })
 
 module.exports = router;
