@@ -13,14 +13,14 @@
                 {{#each products}}
                 <tr>
                     
-                    <td><img style="width: 70px;height: 70px;"src="/product-image/{{this.product._id}}.jpg"></td>
-                    <td>{{this.product.name}}</td>
-                    <td>{{this.product.price}}</td>
+     <td><img style="width: 70px;height: 70px;"src="/product-image/{{this.product._id}}.jpg"></td>
+     <td>{{this.product.name}}</td>
+     <td>{{this.product.price}}</td>
                 
-                    <td>
-                        <button class="cart-item-count me-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{user._id}}',-1)">-</button>
+    <td>
+                        <button class="cart-item-count me-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
-                        <button class="cart-item-count ms-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{user._id}}',1)">+</button></td>
+                        <button class="cart-item-count ms-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button></td>
                      <td><button class="btn btn-danger" onclick="removeCart('{{this._id}}','{{this.product._id}}')">Remove</button></td>
                 </tr> 
                 {{/each}}
@@ -33,7 +33,7 @@
     </div>
 </section>
 <script>
-    function changeQuantity(userId,cartId,proId,count){
+    function changeQuantity(cartId,proId,userId,count){
         let quantity=parseInt(document.getElementById(proId).innerHTML)
         count=parseInt(count)
         $.ajax({
@@ -52,7 +52,7 @@
                     location.reload()
                 }else{
                     document.getElementById(proId).innerHTML=quantity+count
-                    document.getElementById(total).innerHTML=response.total
+                    document.getElementById('total').innerHTML=response.total
                 }
                 }
              })
