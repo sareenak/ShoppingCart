@@ -1,6 +1,6 @@
 var db=require('../config/connection')
 var collections=require('../config/collections');
-const bcryptjs=require('bcryptjs');
+const bcrypt=require('bcrypt');
 var objectId=require('mongodb').ObjectId
 const async = require('hbs/lib/async');
 
@@ -15,11 +15,27 @@ module.exports={
     },
     doLogin:(adminData)=>{
         return new Promise(async(resolve,reject)=>{
-            adminData.password=await bcryptjs.hash(adminData.password,10);
-           let admin= db.get().collection(collections.ADMIN_COLLECTION).insertOne(adminData).then((data)=>{
-                data.admin=admin
-                resolve(data)
-            })
+            //adminData.password=await bcrypt.hash(adminData.password,10);
+            let response={}
+            let admin=await db.get().collection(collections.ADMIN_COLLECTION).findOne({username:adminData.username})
+            if(admin){
+               
+              bcrypt.compare(adminData.password,admin.password).then((status)=>{
+                  //if(adminData.username===admin.username){
+                    if(status){
+                        console.log("login success")
+                        
+                        response.admin=admin
+                        response.status=true
+                        console.log(response+"sareena ")
+                        resolve(response)
+
+                    }else{
+                        console.log("login failed")
+                        resolve({status:false})
+                    }
+                })
+            }
         })
     },
     getAllProducts:()=>{
