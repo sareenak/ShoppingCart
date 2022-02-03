@@ -35,7 +35,7 @@ router.get('/login',(req,res)=>{
     res.redirect('admin/view-products')
 
   }else{
-   res.render('admin/login',{"loginErr":req.session.adminLoginErr,admin:true})
+   res.render('admin/login',{"loginErr":req.session.adminLoginErr})
    req.session.adminLoginErr=false
   
   }
@@ -112,14 +112,15 @@ router.post('/edit-product/:id',(req,res)=>{
   })
 })
 router.get('/allUsers',verifyLogin,(req,res)=>{
-  producthelpers.getallUsers().then((user)=>{
-  res.render('admin/allUsers',{user,admin:req.session.admin})})
+  producthelpers.getallUsers().then((userDetails)=>{
+  res.render('admin/allUsers',{userDetails,admin:req.session.admin})})
 
 })
 router.get('/view-allOrders',verifyLogin,(req,res)=>{
   if(req.session.admin){
   producthelpers.getallOrders().then((orders)=>{
-    res.render('admin/view-allOrders',{admin:req.session.admin,orders,user:false})
+    
+    res.render('admin/view-allOrders',{admin:req.session.admin,orders})
   })
 }
 else{
