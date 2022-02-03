@@ -84,8 +84,8 @@ module.exports={
     },
     getallOrders:()=>{
         return new Promise(async(resolve,reject)=>{
-            let orders=await db.get().collection(collections.ORDER_COLLECTION).find().toArray()
-            //if(orders.status==='placed')
+            let orders=await db.get().collection(collections.ORDER_COLLECTION).find({"status":"Placed"}).toArray()
+            
             resolve(orders)
         })
     }

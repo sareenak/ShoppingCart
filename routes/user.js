@@ -23,6 +23,7 @@ router.get('/', async function(req, res, next) {
  cartCount=await userHelpers.getCartCount(req.session.user._id)
  producthelpers.getAllProducts().then((product)=>{
   res.render('user/view-products', {product,admin:false,user,cartCount})})
+
 });
 router.get('/login',(req,res)=>{
   if(req.session.user){
