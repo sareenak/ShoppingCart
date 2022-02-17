@@ -347,7 +347,7 @@ module.exports={
                 {
                 
                     $set:{
-                       status:'placed'
+                       status:'Placed'
                     }
                 
                 }).then(()=>{

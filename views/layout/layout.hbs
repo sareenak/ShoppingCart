@@ -18,10 +18,8 @@
   <body>
     {{#if admin}}
     {{>adminheader}}
-
-    {{/if}}
-
-    {{#if user}}
+    
+    {{else}}
     {{>userheader}}
     {{/if}}
    {{{body}}}

@@ -35,7 +35,7 @@ router.get('/login',(req,res)=>{
     res.redirect('admin/view-products')
 
   }else{
-   res.render('admin/login',{"loginErr":req.session.adminLoginErr})
+   res.render('admin/login',{"loginErr":req.session.adminLoginErr,admin:true})
    req.session.adminLoginErr=false
   
   }
@@ -77,7 +77,7 @@ router.get('/logout',(req,res)=>{
       let image=req.files.image
       image.mv('./public/product-image/'+id+'.jpg',(err,done)=>{
         if(!err){
-          res.render('admin/addproducts',{admin:true});
+          res.render('admin/addproducts',{admin:req.session.admin});
         }else{
           console.log(err)
         }
@@ -94,13 +94,15 @@ router.get('/logout',(req,res)=>{
   })
 router.get('/edit-product/:id',async(req,res)=>{
   let product= await producthelpers.getProdcutDetails(req.params.id)
+  let admin=req.session.admin
     console.log(product)
-   res.render('admin/edit-product',{product,admin:true})
+   res.render('admin/edit-product',{product,admin})
 })
 router.post('/edit-product/:id',(req,res)=>{
   let id=req.params.id
+  let admin=req.session.admin
   producthelpers.updateProduct(req.params.id,req.body).then(()=>{
-    res.redirect('/admin',{admin:true})
+    res.redirect('/admin',{admin})
     
     if(req.files.image){
       let image=req.files.image
