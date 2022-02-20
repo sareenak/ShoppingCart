@@ -92,17 +92,17 @@ router.get('/logout',(req,res)=>{
       res.redirect('/admin/',{admin:req.session.admin})
     })
   })
-router.get('/edit-product/:id',async(req,res)=>{
+router.get('/edit-product/:id',verifyLogin,async(req,res)=>{
   let product= await producthelpers.getProdcutDetails(req.params.id)
   let admin=req.session.admin
     console.log(product)
    res.render('admin/edit-product',{product,admin})
 })
-router.post('/edit-product/:id',(req,res)=>{
+router.post('/edit-product/:id',verifyLogin,(req,res)=>{
   let id=req.params.id
   let admin=req.session.admin
   producthelpers.updateProduct(req.params.id,req.body).then(()=>{
-    res.redirect('/admin',{admin})
+    res.redirect('/admin')
     
     if(req.files.image){
       let image=req.files.image

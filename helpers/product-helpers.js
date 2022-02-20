@@ -69,7 +69,8 @@ module.exports={
                 $set:{
                     name:data.name,
                     description:data.description,
-                    category:data.category
+                    category:data.category,
+                    price:data.price
                 }
             }).then((response)=>{
                 resolve()
