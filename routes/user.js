@@ -107,8 +107,10 @@ router.get('/signup',(req,res)=>{
     res.render('user/place-order',{user:req.session.user,total})
   })
   router.post('/place-order',async(req,res)=>{
-    let products=await userHelpers.getCartProductList(req.session.user._id)
-    let totalPrice= await userHelpers.getTotalAmount(req.session.user._id)
+    console.log(req.body);
+    let products=await userHelpers.getCartProductList(req.body.userId)
+    let totalPrice= await userHelpers.getTotalAmount(req.body.userId)
+    console.log("placeorder products //////////////////////////////////////////////////////////",products);
     userHelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
       if(req.body['payment']==='COD'){
       res.json({cod_Success:true})
@@ -130,7 +132,7 @@ router.get('/signup',(req,res)=>{
     
   })
   router.get('/view-orders-product/:id',async(req,res)=>{
-    console.log(req.params.id +"hiiii")
+    
   let products= await  userHelpers.getAllOrdersPlaced(req.params.id)
     res.render('user/view-orders-product',{user:req.session.user,products})
   })

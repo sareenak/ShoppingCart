@@ -1,6 +1,6 @@
 <section>
     <div class="container mt-4">
-        <form action="" method="" id="checkout-form">
+        <form method="POST" id="checkout-form">
          <div class="row">
              <div class="col-md-6 ">
             <h4 class="mt-4">Enter Delivery Details</h4>
@@ -37,6 +37,7 @@
                </section>
         <script>
             $("#checkout-form").submit((e)=>{
+                 e.preventDefault()
             $.ajax({
                 url:'/place-order',
                 method:'post',

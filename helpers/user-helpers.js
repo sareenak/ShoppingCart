@@ -229,7 +229,7 @@ module.exports={
             },
             placeOrder:(order,products,total)=>{
                 return new Promise((resolve,reject)=>{
-                   // console.log(order,products,total)
+                   console.log(order,products,total,"??????????????????????????????")
                     let status=order['payment']==='COD'?'Placed':'Pending'
                     let orderObj={
                         Delivery:{
@@ -254,8 +254,10 @@ module.exports={
 
             },
             getCartProductList:(userId)=>{
+                console.log(userId,"userid///");
                 return new Promise(async(resolve,reject)=>{
-                   let cart=await db.get().collection(collection.CART_COLLECTION).find({user:objectId(userId)})
+                   let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+                   console.log(cart,"+++++++++++++++++++++++++++++");
                    resolve(cart.products)
                 })
             },
@@ -267,6 +269,7 @@ module.exports={
                 })
 
             },
+            
             getAllOrdersPlaced:(orderId)=>{
                 return new Promise(async(resolve,reject)=>{
                     let orderItems =await db.get().collection(collection.ORDER_COLLECTION).aggregate([
