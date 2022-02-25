@@ -40,7 +40,7 @@ router.get('/signup',(req,res)=>{
   })
   router.post('/signup',(req,res)=>{
   userHelpers.doSignup(req.body).then((data)=>{
-    //console.log(data);
+    console.log(data);
     
     req.session.user=data
    

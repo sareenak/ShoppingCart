@@ -43,7 +43,7 @@
                 method:'post',
                 data:$('#checkout-form').serialize(),
                 success:(response)=>{
-                    alert(response)
+                    alert("Payment Added")
                     if(response.cod_Success){
                         location.href='/order-placed'
                     }
