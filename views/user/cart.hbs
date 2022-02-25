@@ -15,7 +15,7 @@
                     
      <td><img style="width: 70px;height: 70px;"src="/product-image/{{this.product._id}}.jpg"></td>
      <td>{{this.product.name}}</td>
-     <td>{{this.product.price}}</td>
+     <td>{{this.product.price}} AED</td>
                 
     <td>
                         <button class="cart-item-count me-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
@@ -27,7 +27,7 @@
             </tbody>
         </table>
         <div class="float-end pe-5">
-        <h4 class="float-start">Total : Rs . <span id="total">{{total}}</span></h4>
+        <h4 class="float-start">Total : Rs . <span id="total">{{total}} AED</span></h4>
         <a href="/place-order" class="btn btn-success" style="width: 70%;">PlaceOrder</a>
         </div>
     </div>
